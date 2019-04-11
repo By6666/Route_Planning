@@ -11,6 +11,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "003_Dijkstra", "003_Dijkstr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "004_A_star", "004_A_star\004_A_star.vcxproj", "{2B852E1D-28E7-4004-A413-6FA94703E418}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{752BEB9E-F855-4F1F-8FF0-E939D5AD865B}"
+	ProjectSection(SolutionItems) = preProject
+		Map.h = Map.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

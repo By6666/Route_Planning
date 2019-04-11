@@ -1,4 +1,4 @@
-#include "../Map.h"
+﻿#include "../Map.h"
 using namespace std;
 
 struct Node
@@ -8,13 +8,11 @@ struct Node
 	bool operator < (const Node& a) const { return cos > a.cos; }
 };
 
-
-
 int main()
 {
 	pair<int, int> buff;
 	pair<int, int> start(1, 1);
-	pair<int, int> end(13, 13);
+	pair<int, int> end(End_I, End_II);
 	Map[start.first][start.second] = 'S';
 	Map[end.first][end.second] = 'E';
 	cout << "Initial the map " << endl;
@@ -44,63 +42,60 @@ int main()
 			break;
 		}
 		que.pop();
+		//Map[buff.first][buff.second] = ' ';
 
-		if (Up != 1 && Up != 'S')
-		{
-			new_cost = cost_to_start[buff] + 1;
+		new_cost = cost_to_start[buff] + 1;
 
-			if (cost_to_start.find(make_pair(buff.first - 1, buff.second)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first - 1, buff.second)])
-			{
-				cost_to_start[make_pair(buff.first - 1, buff.second)] = new_cost;
-				stg.cos = new_cost;
-				stg.xoy = make_pair(buff.first - 1, buff.second);
-				que.push(stg);
-				path[make_pair(buff.first - 1, buff.second)] = buff;
-			}
-			if (Up == 'E') break;
-			Up = '*';
-		}
-		if (Down != 1 && Down != 'S')
+		if (Left == 0 || Left == 'E')
 		{
-			if (cost_to_start.find(make_pair(buff.first + 1, buff.second)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first + 1, buff.second)])
-			{
-				cost_to_start[make_pair(buff.first + 1, buff.second)] = new_cost;
-				stg.cos = new_cost;
-				stg.xoy = make_pair(buff.first + 1, buff.second);
-				que.push(stg);
-				path[make_pair(buff.first + 1, buff.second)] = buff;
-			}
-			if (Down == 'E') break;
-			Down = '*';
-		}
-		if (Left != 1 && Left != 'S')
-		{
-			if (cost_to_start.find(make_pair(buff.first, buff.second - 1)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first, buff.second - 1)])
-			{
-				cost_to_start[make_pair(buff.first, buff.second - 1)] = new_cost;
-				stg.cos = new_cost;
-				stg.xoy = make_pair(buff.first, buff.second - 1);
-				que.push(stg);
-				path[make_pair(buff.first, buff.second - 1)] = buff;
-			}
-
+			cost_to_start[make_pair(buff.first, buff.second - 1)] = new_cost;
+			stg.cos = new_cost;
+			stg.xoy = make_pair(buff.first, buff.second - 1);
+			que.push(stg);
+			path[make_pair(buff.first, buff.second - 1)] = buff;
 			if (Left == 'E') break;
 			Left = '*';
 		}
-		if (Right != 1 && Right != 'S')
-		{
-			if (cost_to_start.find(make_pair(buff.first, buff.second + 1)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first, buff.second + 1)])
-			{
-				cost_to_start[make_pair(buff.first, buff.second + 1)] = new_cost;
-				stg.cos = new_cost;
-				stg.xoy = make_pair(buff.first, buff.second + 1);
-				que.push(stg);
-				path[make_pair(buff.first, buff.second + 1)] = buff;
-			}
 
+		if (Up == 0 || Up == 'E')
+		{
+			cost_to_start[make_pair(buff.first - 1, buff.second)] = new_cost;
+			stg.cos = new_cost;
+			stg.xoy = make_pair(buff.first - 1, buff.second);
+			que.push(stg);
+			path[make_pair(buff.first - 1, buff.second)] = buff;
+			if (Up == 'E') break;
+			Up = '*';
+		}
+
+		if (Down == 0 || Down == 'E')
+		{
+			cost_to_start[make_pair(buff.first + 1, buff.second)] = new_cost;
+			stg.cos = new_cost;
+			stg.xoy = make_pair(buff.first + 1, buff.second);
+			que.push(stg);
+			path[make_pair(buff.first + 1, buff.second)] = buff;
+			if (Down == 'E') break;
+			Down = '*';
+		}
+
+		if (Right == 0 || Right == 'E')
+		{
+			cost_to_start[make_pair(buff.first, buff.second + 1)] = new_cost;
+			stg.cos = new_cost;
+			stg.xoy = make_pair(buff.first, buff.second + 1);
+			que.push(stg);
+			path[make_pair(buff.first, buff.second + 1)] = buff;
 			if (Right == 'E') break;
 			Right = '*';
 		}
+
+		//for (auto &hang : Map)
+		//{
+		//	for (char item : hang) cout << item << " ";
+		//	cout << endl;
+		//}
+		//cout << endl;
 
 	}
 

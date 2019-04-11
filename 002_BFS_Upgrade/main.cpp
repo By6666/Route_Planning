@@ -1,4 +1,4 @@
-#include "../Map.h"
+﻿#include "../Map.h"
 using namespace std;
 
 struct Node
@@ -21,7 +21,7 @@ int main()
 {
 	pair<int, int> buff;
 	pair<int, int> start(1, 1);
-	pair<int, int> end(13, 13);
+	pair<int, int> end(End_I, End_II);
 	Map[start.first][start.second] = 'S';
 	Map[end.first][end.second] = 'E';
 	cout << "Initial the map " << endl;
@@ -48,99 +48,53 @@ int main()
 			break;
 		}
 		que.pop();
+		//Map[buff.first][buff.second] = ' ';
 
-		//if (Up == 0 || Up == 'E')
-		//{
-		//	stg.xoy = make_pair(buff.first - 1, buff.second);
-		//	stg.dis = dis_to_end(make_pair(buff.first - 1, buff.second), end);
-		//	que.push(stg);
-		//	path[make_pair(buff.first - 1, buff.second)] = buff;
-		//	if (Up == 'E') break;
-		//	Up = '*';
-		//}
-		//if (Down == 0 || Down == 'E')
-		//{
-		//	stg.xoy = make_pair(buff.first + 1, buff.second);
-		//	stg.dis = dis_to_end(make_pair(buff.first + 1, buff.second), end);
-		//	que.push(stg);
-		//	path[make_pair(buff.first + 1, buff.second)] = buff;
-		//	if (Down == 'E') break;
-		//	Down = '*';
-		//}
-		//if (Left == 0 || Left == 'E')
-		//{
-		//	stg.xoy = make_pair(buff.first, buff.second - 1);
-		//	stg.dis = dis_to_end(make_pair(buff.first, buff.second - 1), end);
-		//	que.push(stg);
-		//	path[make_pair(buff.first, buff.second - 1)] = buff;
-		//	if (Left == 'E') break;
-		//	Left = '*';
-		//}
-		//if (Right == 0 || Right == 'E')
-		//{
-		//	stg.xoy = make_pair(buff.first, buff.second + 1);
-		//	stg.dis = dis_to_end(make_pair(buff.first, buff.second + 1), end);
-		//	que.push(stg);
-		//	path[make_pair(buff.first, buff.second + 1)] = buff;
-		//	if (Right == 'E') break;
-		//	Right = '*';
-		//}
-
-		if (Up != 1 && Up != 'S')
+		if (Up == 0 || Up == 'E')
 		{
-			if (path.find(make_pair(buff.first - 1, buff.second)) == path.end())
-			{
-				stg.xoy = make_pair(buff.first - 1, buff.second);
-				stg.dis = dis_to_end(make_pair(buff.first - 1, buff.second), end);
-				que.push(stg);
-				path[make_pair(buff.first - 1, buff.second)] = buff;
-			}
+			stg.xoy = make_pair(buff.first - 1, buff.second);
+			stg.dis = dis_to_end(make_pair(buff.first - 1, buff.second), end);
+			que.push(stg);
+			path[make_pair(buff.first - 1, buff.second)] = buff;
 			if (Up == 'E') break;
 			Up = '*';
 		}
-		if (Down != 1 && Down != 'S')
+		if (Left == 0 || Left == 'E')
 		{
-			if (path.find(make_pair(buff.first + 1, buff.second)) == path.end())
-			{
-				stg.xoy = make_pair(buff.first + 1, buff.second);
-				stg.dis = dis_to_end(make_pair(buff.first + 1, buff.second), end);
-				que.push(stg);
-				path[make_pair(buff.first + 1, buff.second)] = buff;
-			}
-			if (Down == 'E') break;
-			Down = '*';
-		}
-		if (Left != 1 && Left != 'S')
-		{
-			if (path.find(make_pair(buff.first, buff.second - 1)) == path.end())
-			{
-				stg.xoy = make_pair(buff.first, buff.second - 1);
-				stg.dis = dis_to_end(make_pair(buff.first, buff.second - 1), end);
-				que.push(stg);
-				path[make_pair(buff.first, buff.second - 1)] = buff;
-			}
+			stg.xoy = make_pair(buff.first, buff.second - 1);
+			stg.dis = dis_to_end(make_pair(buff.first, buff.second - 1), end);
+			que.push(stg);
+			path[make_pair(buff.first, buff.second - 1)] = buff;
 			if (Left == 'E') break;
 			Left = '*';
 		}
-		if (Right != 1 && Right != 'S')
+
+		if (Right == 0 || Right == 'E')
 		{
-			if (path.find(make_pair(buff.first, buff.second + 1)) == path.end())
-			{
-				stg.xoy = make_pair(buff.first, buff.second + 1);
-				stg.dis = dis_to_end(make_pair(buff.first, buff.second + 1), end);
-				que.push(stg);
-				path[make_pair(buff.first, buff.second + 1)] = buff;
-			}
+			stg.xoy = make_pair(buff.first, buff.second + 1);
+			stg.dis = dis_to_end(make_pair(buff.first, buff.second + 1), end);
+			que.push(stg);
+			path[make_pair(buff.first, buff.second + 1)] = buff;
 			if (Right == 'E') break;
 			Right = '*';
 		}
 
-		for (auto &hang : Map)
+		if (Down == 0 || Down == 'E')
 		{
-			for (char item : hang) cout << item << " ";
-			cout << endl;
+			stg.xoy = make_pair(buff.first + 1, buff.second);
+			stg.dis = dis_to_end(make_pair(buff.first + 1, buff.second), end);
+			que.push(stg);
+			path[make_pair(buff.first + 1, buff.second)] = buff;
+			if (Down == 'E') break;
+			Down = '*';
 		}
-		cout << endl;
+
+		//for (auto &hang : Map)
+		//{
+		//	for (char item : hang) cout << item << " ";
+		//	cout << endl;
+		//}
+		//cout << endl;
 
 	}
 

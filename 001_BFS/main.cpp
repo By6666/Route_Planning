@@ -1,4 +1,4 @@
-#include "../Map.h"
+﻿#include "../Map.h"
 using namespace std;
 
 
@@ -6,7 +6,7 @@ int main()
 {
 	pair<int, int> buff;
 	pair<int, int> start(1, 1);
-	pair<int, int> end(13,13);
+	pair<int, int> end(End_I, End_II);
 	Map[start.first][start.second] = 'S';
 	Map[end.first][end.second] = 'E';
 	cout << "Initial the map " << endl;
@@ -30,6 +30,7 @@ int main()
 			break;
 		}
 		que.pop();
+		//Map[buff.first][buff.second] = ' ';
 
 		if (Up == 0 || Up == 'E')
 		{
@@ -37,13 +38,6 @@ int main()
 			path[make_pair(buff.first - 1, buff.second)] = buff;
 			if (Up == 'E') break;
 			Up = '*';
-		}
-		if (Down == 0 || Down == 'E')
-		{
-			que.push(make_pair(buff.first + 1, buff.second));
-			path[make_pair(buff.first +1, buff.second)] = buff;
-			if (Down == 'E') break;
-			Down = '*';
 		}
 		if (Left == 0 || Left == 'E')
 		{
@@ -59,12 +53,20 @@ int main()
 			if (Right == 'E') break;
 			Right = '*';
 		}
-		for (auto &hang : Map)
+		if (Down == 0 || Down == 'E')
 		{
-			for (char item : hang) cout << item << " ";
-			cout << endl;
+			que.push(make_pair(buff.first + 1, buff.second));
+			path[make_pair(buff.first + 1, buff.second)] = buff;
+			if (Down == 'E') break;
+			Down = '*';
 		}
-		cout << endl;
+
+		//for (auto &hang : Map)
+		//{
+		//	for (char item : hang) cout << item << " ";
+		//	cout << endl;
+		//}
+		//cout << endl;
 	}
 
 	for (auto &hang : Map)

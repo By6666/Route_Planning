@@ -1,4 +1,4 @@
-#include "../Map.h"
+﻿#include "../Map.h"
 using namespace std;
 
 struct Node
@@ -20,7 +20,7 @@ int main()
 {
 	pair<int, int> buff;
 	pair<int, int> start(1, 1);
-	pair<int, int> end(13, 13);
+	pair<int, int> end(End_I, End_II);
 	Map[start.first][start.second] = 'S';
 	Map[end.first][end.second] = 'E';
 	cout << "Initial the map " << endl;
@@ -51,10 +51,10 @@ int main()
 		}
 		que.pop();
 
+		new_cost = cost_to_start[buff] + 1;
+
 		if (Up != 1 && Up != 'S')
 		{
-			new_cost = cost_to_start[buff] + 1;
-
 			if (cost_to_start.find(make_pair(buff.first - 1, buff.second)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first - 1, buff.second)])
 			{
 				cost_to_start[make_pair(buff.first - 1, buff.second)] = new_cost;
@@ -66,19 +66,7 @@ int main()
 			if (Up == 'E') break;
 			Up = '*';
 		}
-		if (Down != 1 && Down != 'S')
-		{
-			if (cost_to_start.find(make_pair(buff.first + 1, buff.second)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first + 1, buff.second)])
-			{
-				cost_to_start[make_pair(buff.first + 1, buff.second)] = new_cost;
-				stg.cos = new_cost + dis_to_end(make_pair(buff.first + 1, buff.second), end);
-				stg.xoy = make_pair(buff.first + 1, buff.second);
-				que.push(stg);
-				path[make_pair(buff.first + 1, buff.second)] = buff;
-			}
-			if (Down == 'E') break;
-			Down = '*';
-		}
+
 		if (Left != 1 && Left != 'S')
 		{
 			if (cost_to_start.find(make_pair(buff.first, buff.second - 1)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first, buff.second - 1)])
@@ -92,6 +80,19 @@ int main()
 
 			if (Left == 'E') break;
 			Left = '*';
+		}
+		if (Down != 1 && Down != 'S')
+		{
+			if (cost_to_start.find(make_pair(buff.first + 1, buff.second)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first + 1, buff.second)])
+			{
+				cost_to_start[make_pair(buff.first + 1, buff.second)] = new_cost;
+				stg.cos = new_cost + dis_to_end(make_pair(buff.first + 1, buff.second), end);
+				stg.xoy = make_pair(buff.first + 1, buff.second);
+				que.push(stg);
+				path[make_pair(buff.first + 1, buff.second)] = buff;
+			}
+			if (Down == 'E') break;
+			Down = '*';
 		}
 		if (Right != 1 && Right != 'S')
 		{
@@ -108,12 +109,13 @@ int main()
 			Right = '*';
 		}
 
-		for (auto &hang : Map)
-		{
-			for (char item : hang) cout << item << " ";
-			cout << endl;
-		}
-		cout << endl;
+
+		//for (auto &hang : Map)
+		//{
+		//	for (char item : hang) cout << item << " ";
+		//	cout << endl;
+		//}
+		//cout << endl;
 
 	}
 
