@@ -46,28 +46,6 @@ int main()
 
 		new_cost = cost_to_start[buff] + 1;
 
-		if (Left == 0 || Left == 'E')
-		{
-			cost_to_start[make_pair(buff.first, buff.second - 1)] = new_cost;
-			stg.cos = new_cost;
-			stg.xoy = make_pair(buff.first, buff.second - 1);
-			que.push(stg);
-			path[make_pair(buff.first, buff.second - 1)] = buff;
-			if (Left == 'E') break;
-			Left = '*';
-		}
-
-		if (Up == 0 || Up == 'E')
-		{
-			cost_to_start[make_pair(buff.first - 1, buff.second)] = new_cost;
-			stg.cos = new_cost;
-			stg.xoy = make_pair(buff.first - 1, buff.second);
-			que.push(stg);
-			path[make_pair(buff.first - 1, buff.second)] = buff;
-			if (Up == 'E') break;
-			Up = '*';
-		}
-
 		if (Down == 0 || Down == 'E')
 		{
 			cost_to_start[make_pair(buff.first + 1, buff.second)] = new_cost;
@@ -78,7 +56,6 @@ int main()
 			if (Down == 'E') break;
 			Down = '*';
 		}
-
 		if (Right == 0 || Right == 'E')
 		{
 			cost_to_start[make_pair(buff.first, buff.second + 1)] = new_cost;
@@ -88,6 +65,26 @@ int main()
 			path[make_pair(buff.first, buff.second + 1)] = buff;
 			if (Right == 'E') break;
 			Right = '*';
+		}
+		if (Up == 0 || Up == 'E')
+		{
+			cost_to_start[make_pair(buff.first - 1, buff.second)] = new_cost;
+			stg.cos = new_cost;
+			stg.xoy = make_pair(buff.first - 1, buff.second);
+			que.push(stg);
+			path[make_pair(buff.first - 1, buff.second)] = buff;
+			if (Up == 'E') break;
+			Up = '*';
+		}
+		if (Left == 0 || Left == 'E')
+		{
+			cost_to_start[make_pair(buff.first, buff.second - 1)] = new_cost;
+			stg.cos = new_cost;
+			stg.xoy = make_pair(buff.first, buff.second - 1);
+			que.push(stg);
+			path[make_pair(buff.first, buff.second - 1)] = buff;
+			if (Left == 'E') break;
+			Left = '*';
 		}
 
 		//for (auto &hang : Map)
@@ -117,7 +114,7 @@ int main()
 			Map[buff.first][buff.second] = 'S';
 			break;
 		}
-		Map[buff.first][buff.second] = '=';
+		Map[buff.first][buff.second] = '-';
 	}
 
 	cout << "Path as following :" << endl;

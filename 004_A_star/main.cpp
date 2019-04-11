@@ -66,6 +66,70 @@ int main()
 			if (Up == 'E') break;
 			Up = '*';
 		}
+		if (Up != 1 && Right != 1 && Right_Up != 1 && Right_Up != 'S' && Right_Up != 'E')
+		{
+			if (cost_to_start.find(make_pair(buff.first - 1, buff.second + 1)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first - 1, buff.second + 1)])
+			{
+				cost_to_start[make_pair(buff.first - 1, buff.second + 1)] = new_cost;
+				stg.cos = new_cost + dis_to_end(make_pair(buff.first - 1, buff.second + 1), end);
+				stg.xoy = make_pair(buff.first - 1, buff.second + 1);
+				que.push(stg);
+				path[make_pair(buff.first - 1, buff.second + 1)] = buff;
+			}
+			Right_Up = '*';
+		}
+		if (Right != 1 && Right != 'S')
+		{
+			if (cost_to_start.find(make_pair(buff.first, buff.second + 1)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first, buff.second + 1)])
+			{
+				cost_to_start[make_pair(buff.first, buff.second + 1)] = new_cost;
+				stg.cos = new_cost + dis_to_end(make_pair(buff.first, buff.second + 1), end);
+				stg.xoy = make_pair(buff.first, buff.second + 1);
+				que.push(stg);
+				path[make_pair(buff.first, buff.second + 1)] = buff;
+			}
+
+			if (Right == 'E') break;
+			Right = '*';
+		}
+		if (Down != 1 && Down != 'S')
+		{
+			if (cost_to_start.find(make_pair(buff.first + 1, buff.second)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first + 1, buff.second)])
+			{
+				cost_to_start[make_pair(buff.first + 1, buff.second)] = new_cost;
+				stg.cos = new_cost + dis_to_end(make_pair(buff.first + 1, buff.second), end);
+				stg.xoy = make_pair(buff.first + 1, buff.second);
+				que.push(stg);
+				path[make_pair(buff.first + 1, buff.second)] = buff;
+			}
+			if (Down == 'E') break;
+			Down = '*';
+		}
+		if (Down != 1 && Right != 1 && Right_Down != 1 && Right_Down != 'S'&& Right_Down != 'E')
+		{
+			if (cost_to_start.find(make_pair(buff.first + 1, buff.second + 1)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first + 1, buff.second + 1)])
+			{
+				cost_to_start[make_pair(buff.first + 1, buff.second + 1)] = new_cost;
+				stg.cos = new_cost + dis_to_end(make_pair(buff.first + 1, buff.second + 1), end);
+				stg.xoy = make_pair(buff.first + 1, buff.second + 1);
+				que.push(stg);
+				path[make_pair(buff.first + 1, buff.second + 1)] = buff;
+			}
+			Right_Down = '*';
+		}
+
+		if (Left != 1 && Down != 1 && Left_Down != 1 && Left_Down != 'S'&&Left_Down != 'E')
+		{
+			if (cost_to_start.find(make_pair(buff.first + 1, buff.second - 1)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first + 1, buff.second - 1)])
+			{
+				cost_to_start[make_pair(buff.first + 1, buff.second - 1)] = new_cost;
+				stg.cos = new_cost + dis_to_end(make_pair(buff.first + 1, buff.second - 1), end);
+				stg.xoy = make_pair(buff.first + 1, buff.second - 1);
+				que.push(stg);
+				path[make_pair(buff.first + 1, buff.second - 1)] = buff;
+			}
+			Left_Down = '*';
+		}
 
 		if (Left != 1 && Left != 'S')
 		{
@@ -81,32 +145,18 @@ int main()
 			if (Left == 'E') break;
 			Left = '*';
 		}
-		if (Down != 1 && Down != 'S')
-		{
-			if (cost_to_start.find(make_pair(buff.first + 1, buff.second)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first + 1, buff.second)])
-			{
-				cost_to_start[make_pair(buff.first + 1, buff.second)] = new_cost;
-				stg.cos = new_cost + dis_to_end(make_pair(buff.first + 1, buff.second), end);
-				stg.xoy = make_pair(buff.first + 1, buff.second);
-				que.push(stg);
-				path[make_pair(buff.first + 1, buff.second)] = buff;
-			}
-			if (Down == 'E') break;
-			Down = '*';
-		}
-		if (Right != 1 && Right != 'S')
-		{
-			if (cost_to_start.find(make_pair(buff.first, buff.second + 1)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first, buff.second + 1)])
-			{
-				cost_to_start[make_pair(buff.first, buff.second + 1)] = new_cost;
-				stg.cos = new_cost + dis_to_end(make_pair(buff.first, buff.second + 1), end);
-				stg.xoy = make_pair(buff.first, buff.second + 1);
-				que.push(stg);
-				path[make_pair(buff.first, buff.second + 1)] = buff;
-			}
 
-			if (Right == 'E') break;
-			Right = '*';
+		if (Left != 1 && Up != 1 && Left_Up != 1 && Left_Up != 'S'&&Left_Up != 'E')
+		{
+			if (cost_to_start.find(make_pair(buff.first - 1, buff.second - 1)) == cost_to_start.end() || new_cost < cost_to_start[make_pair(buff.first - 1, buff.second - 1)])
+			{
+				cost_to_start[make_pair(buff.first - 1, buff.second - 1)] = new_cost;
+				stg.cos = new_cost + dis_to_end(make_pair(buff.first - 1, buff.second - 1), end);
+				stg.xoy = make_pair(buff.first - 1, buff.second - 1);
+				que.push(stg);
+				path[make_pair(buff.first - 1, buff.second - 1)] = buff;
+			}
+			Left_Up = '*';
 		}
 
 
@@ -137,7 +187,7 @@ int main()
 			Map[buff.first][buff.second] = 'S';
 			break;
 		}
-		Map[buff.first][buff.second] = '=';
+		Map[buff.first][buff.second] = '-';
 	}
 
 	cout << "Path as following :" << endl;

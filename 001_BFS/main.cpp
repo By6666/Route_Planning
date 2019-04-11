@@ -31,20 +31,12 @@ int main()
 		}
 		que.pop();
 		//Map[buff.first][buff.second] = ' ';
-
-		if (Up == 0 || Up == 'E')
+		if (Down == 0 || Down == 'E')
 		{
-			que.push(make_pair(buff.first - 1, buff.second));
-			path[make_pair(buff.first - 1, buff.second)] = buff;
-			if (Up == 'E') break;
-			Up = '*';
-		}
-		if (Left == 0 || Left == 'E')
-		{
-			que.push(make_pair(buff.first, buff.second - 1));
-			path[make_pair(buff.first, buff.second - 1)] = buff;
-			if (Left == 'E') break;
-			Left = '*';
+			que.push(make_pair(buff.first + 1, buff.second));
+			path[make_pair(buff.first + 1, buff.second)] = buff;
+			if (Down == 'E') break;
+			Down = '*';
 		}
 		if (Right == 0 || Right == 'E')
 		{
@@ -53,14 +45,45 @@ int main()
 			if (Right == 'E') break;
 			Right = '*';
 		}
-		if (Down == 0 || Down == 'E')
+		if (Right != 1 && Down != 1 && Right_Down == 0 && Right_Down != 'E')
 		{
-			que.push(make_pair(buff.first + 1, buff.second));
-			path[make_pair(buff.first + 1, buff.second)] = buff;
-			if (Down == 'E') break;
-			Down = '*';
+			que.push(make_pair(buff.first + 1, buff.second + 1));
+			path[make_pair(buff.first + 1, buff.second + 1)] = buff;
+			Right_Down = '*';
+		}
+		if (Up == 0 || Up == 'E')
+		{
+			que.push(make_pair(buff.first - 1, buff.second));
+			path[make_pair(buff.first - 1, buff.second)] = buff;
+			if (Up == 'E') break;
+			Up = '*';
+		}
+		if (Right != 1 && Up != 1 && Right_Up == 0 && Right_Up != 'E')
+		{
+			que.push(make_pair(buff.first - 1, buff.second + 1));
+			path[make_pair(buff.first - 1, buff.second + 1)] = buff;
+			Right_Up = '*';
+		}
+		if (Left != 1 && Down != 1 && Left_Down == 0 && Left_Down != 'E')
+		{
+			que.push(make_pair(buff.first + 1, buff.second - 1));
+			path[make_pair(buff.first + 1, buff.second - 1)] = buff;
+			Left_Down = '*';
 		}
 
+		if (Left == 0 || Left == 'E')
+		{
+			que.push(make_pair(buff.first, buff.second - 1));
+			path[make_pair(buff.first, buff.second - 1)] = buff;
+			if (Left == 'E') break;
+			Left = '*';
+		}
+		if (Left != 1 && Up != 1 && Left_Up == 0 && Left_Up != 'E')
+		{
+			que.push(make_pair(buff.first - 1, buff.second - 1));
+			path[make_pair(buff.first - 1, buff.second - 1)] = buff;
+			Left_Up = '*';
+		}
 		//for (auto &hang : Map)
 		//{
 		//	for (char item : hang) cout << item << " ";
@@ -86,7 +109,7 @@ int main()
 			Map[buff.first][buff.second] = 'S';
 			break;
 		}
-		Map[buff.first][buff.second] = '=';
+		Map[buff.first][buff.second] = '-';
 	}
 
 	cout << "Path as following :" << endl;
