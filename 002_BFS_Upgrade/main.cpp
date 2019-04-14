@@ -11,9 +11,9 @@ struct Node
 double dis_to_end(pair<int, int> cur, pair<int, int> end)
 {
 	//return sqrt(pow((cur.first - end.first), 2) + pow((cur.second - end.second), 2));
-	return pow((cur.first - end.first), 2) + pow((cur.second - end.second), 2);
+	//return pow((cur.first - end.first), 2) + pow((cur.second - end.second), 2);
 	//return abs(cur.first - end.first) +abs(cur.second - end.second);
-
+	return 4 * (abs(cur.first - end.first) + abs(cur.second - end.second));  //曼哈顿距离
 }
 
 

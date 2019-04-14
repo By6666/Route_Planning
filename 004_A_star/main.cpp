@@ -10,16 +10,26 @@ struct Node
 
 double dis_to_end(pair<int, int> cur, pair<int, int> end)
 {
-	//return sqrt(pow((cur.first - end.first), 2) + pow((cur.second - end.second), 2));
-	return pow((cur.first - end.first), 2) + pow((cur.second - end.second), 2);
+	static double heuristic; //附加值
+	heuristic += (abs(cur.first - end.first)*abs(End_II - Start_II) - abs(End_I - Start_I)*abs(cur.second - end.second))*0.001;
+	return 1 * (abs(cur.first - end.first) + abs(cur.second - end.second)) + heuristic;  //曼哈顿距离
+
+	//return sqrt(pow((cur.first - end.first), 2) + pow((cur.second - end.second), 2));//欧几得距离
+	//return pow((cur.first - end.first), 2) + pow((cur.second - end.second), 2);
 	//return abs(cur.first - end.first) + abs(cur.second - end.second);
+	//return sqrt(2) * 1 * (min(abs(cur.first - end.first), abs(cur.second - end.second)))  //对角线距离
+	//	+ 1 * ((abs(cur.first - end.first) + abs(cur.second - end.second)) - 2 * min(abs(cur.first - end.first), abs(cur.second - end.second)));
+
+	//return sqrt(2) * 1 * (min(abs(cur.first - end.first), abs(cur.second - end.second)))  //对角线距离
+	//	+ 1 * ((abs(cur.first - end.first) + abs(cur.second - end.second)) - 2 * min(abs(cur.first - end.first), abs(cur.second - end.second)))+ heuristic;
+
 }
 
 
 int main()
 {
 	pair<int, int> buff;
-	pair<int, int> start(1, 1);
+	pair<int, int> start(Start_I, Start_II);
 	pair<int, int> end(End_I, End_II);
 	Map[start.first][start.second] = 'S';
 	Map[end.first][end.second] = 'E';
@@ -179,15 +189,21 @@ int main()
 
 	buff = end;
 	Map[end.first][end.second] = 'E';
+	int cnt = 0;
+	double dis = 0;
 	while (1)
 	{
-		buff = path[buff];
-		if (buff == start)
+		pair<int, int> dis_buff;
+		dis_buff = path[buff];
+		if (dis_buff == start)
 		{
-			Map[buff.first][buff.second] = 'S';
+			Map[dis_buff.first][dis_buff.second] = 'S';
 			break;
 		}
-		Map[buff.first][buff.second] = '-';
+		Map[dis_buff.first][dis_buff.second] = '-';
+		cnt++;
+		dis += sqrt(pow(dis_buff.first - buff.first, 2) + pow(dis_buff.second - buff.second, 2));
+		buff = dis_buff;
 	}
 
 	cout << "Path as following :" << endl;
@@ -196,8 +212,7 @@ int main()
 		for (char item : hang) cout << item << " ";
 		cout << endl;
 	}
-	cout << endl;
-
+	cout << "The step is : " << cnt << "  dis is : " << dis << endl;
 
 	system("pause");
 	return 0;
