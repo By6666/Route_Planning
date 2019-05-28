@@ -11,8 +11,8 @@ struct Node
 double dis_to_end(pair<int, int> cur, pair<int, int> end)
 {
 	static double heuristic; //附加值
-	heuristic += (abs(cur.first - end.first)*abs(End_II - Start_II) - abs(End_I - Start_I)*abs(cur.second - end.second))*0.001;
-	return 1 * (abs(cur.first - end.first) + abs(cur.second - end.second)) + heuristic;  //曼哈顿距离
+	heuristic += abs((cur.first - end.first)*(End_II - Start_II) - (End_I - Start_I)*(cur.second - end.second))*0.1;//两个向量的叉积，平面几何意义在于两个向量组成的平行四边形面积
+	return 1 * (abs(cur.first - end.first) + abs(cur.second - end.second)) /*+ heuristic*/;  //曼哈顿距离
 
 	//return sqrt(pow((cur.first - end.first), 2) + pow((cur.second - end.second), 2));//欧几得距离
 	//return pow((cur.first - end.first), 2) + pow((cur.second - end.second), 2);
