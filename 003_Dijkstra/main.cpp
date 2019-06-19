@@ -103,27 +103,37 @@ int main()
 	}
 	cout << endl;
 
-
 	buff = end;
 	Map[end.first][end.second] = 'E';
+	int cnt = 0;
+	double dis = 0;
 	while (1)
 	{
-		buff = path[buff];
-		if (buff == start)
+		pair<int, int> dis_buff;
+		dis_buff = path[buff];
+		if (dis_buff == start)
 		{
-			Map[buff.first][buff.second] = 'S';
+			Map[dis_buff.first][dis_buff.second] = 'S';
 			break;
 		}
-		Map[buff.first][buff.second] = '-';
+		Map[dis_buff.first][dis_buff.second] = '-';
+		cnt++;
+		dis += sqrt(pow(dis_buff.first - buff.first, 2) + pow(dis_buff.second - buff.second, 2));
+		buff = dis_buff;
 	}
 
+	int Search_cnt = 0;
 	cout << "Path as following :" << endl;
 	for (auto &hang : Map)
 	{
-		for (char item : hang) cout << item << " ";
+		for (char item : hang) {
+			if (item == '*') Search_cnt++;
+			cout << item << " ";
+		}
 		cout << endl;
 	}
-	cout << endl;
+	cout << "The step is : " << cnt << "  dis is : " << dis << "  Search step :" << Search_cnt << endl;
+
 
 
 	system("pause");

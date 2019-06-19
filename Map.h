@@ -87,10 +87,10 @@
 //					1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 };
 
 #define Max_length 32
-#define Start_I   10
+#define Start_I   1
 #define Start_II  1
-#define End_I   Max_length-22
-#define End_II  Max_length-5
+#define End_I   Max_length-7
+#define End_II  Max_length-2
 char Map[Max_length][Max_length] = { 
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,1,

@@ -206,13 +206,17 @@ int main()
 		buff = dis_buff;
 	}
 
+	int Search_cnt = 0;
 	cout << "Path as following :" << endl;
 	for (auto &hang : Map)
 	{
-		for (char item : hang) cout << item << " ";
+		for (char item : hang) {
+			if (item == '*') Search_cnt++;
+			cout << item << " ";
+		}
 		cout << endl;
 	}
-	cout << "The step is : " << cnt << "  dis is : " << dis << endl;
+	cout << "The step is : " << cnt << "  dis is : " << dis << "  Search step :" << Search_cnt << endl;
 
 	system("pause");
 	return 0;
